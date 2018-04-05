@@ -1,4 +1,4 @@
-# Polymer App Toolbox - Starter Kit
+# Polymer-2.0-Redux
 
 [![Build Status](https://travis-ci.org/Polymer/polymer-starter-kit.svg?branch=master)](https://travis-ci.org/Polymer/polymer-starter-kit)
 
@@ -11,45 +11,17 @@ the content at the initial route requested by the user, along with fast subseque
 navigation by pre-caching the remaining components required by the app and
 progressively loading them on-demand as the user navigates through the app.
 
-The PRPL pattern, in a nutshell:
-
-* **Push** components required for the initial route
-* **Render** initial route ASAP
-* **Pre-cache** components for remaining routes
-* **Lazy-load** and progressively upgrade next routes on-demand
-
-### Migrating from Polymer Starter Kit v1?
-
-[Check out our blog post that covers what's changed in PSK2 and how to migrate!](https://www.polymer-project.org/1.0/blog/2016-08-18-polymer-starter-kit-or-polymer-cli.html)
-
-### Quickstart
-
-We've recorded a Polycast to get you up and running with PSK2 fast!
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=HgJ0XCyBwzY&list=PLNYkxOF6rcIDdS7HWIC_BYRunV6MHs5xo&index=10">
-    <img src="https://img.youtube.com/vi/HgJ0XCyBwzY/0.jpg" alt="Polymer Starter Kit 2 video">
-  </a>
-</p>
-
 ### Setup
 
 ##### Prerequisites
 
-First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
-[npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
+First, install [npm dependencies](https://www.npmjs.com/get-npm) using npm (we assume you have pre-installed node.js).
 
-    npm install -g polymer-cli
+    npm install
 
-Second, install [Bower](https://bower.io/) using [npm](https://www.npmjs.com)
+Second, install [Bower dependencies](https://bower.io/) using [bower](https://bower.io/)
 
-    npm install -g bower
-
-##### Initialize project from template
-
-    mkdir my-app
-    cd my-app
-    polymer init polymer-2-starter-kit
+    bower install
 
 ### Start the development server
 
@@ -108,18 +80,3 @@ against the browsers currently installed on your machine:
 
     polymer test
 
-If running Windows you will need to set the following environment variables:
-
-- LAUNCHPAD_BROWSERS
-- LAUNCHPAD_CHROME
-
-Read More here [daffl/launchpad](https://github.com/daffl/launchpad#environment-variables-impacting-local-browsers-detection)
-
-### Adding a new view
-
-You can extend the app by adding more views that will be demand-loaded
-e.g. based on the route, or to progressively render non-critical sections of the
-application. Each new demand-loaded fragment should be added to the list of
-`fragments` in the included `polymer.json` file. This will ensure those
-components and their dependencies are added to the list of pre-cached components
-and will be included in the build.
