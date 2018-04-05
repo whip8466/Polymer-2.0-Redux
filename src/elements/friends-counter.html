@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../state/redux-store.html">
+
+<dom-module id="friends-counter">
+    <template>
+        <p>You have {{friendCount}} friends.</p>
+    </template>
+    <script>
+        class FriendsCounter extends ReduxMixin(Polymer.Element){
+            static get is() { return "friends-counter"; }
+
+            static get properties(){
+                return {
+                    friends: {
+                        type: Array,
+                        statePath(state){
+                            return state.friends;
+                        }
+                    },
+                    friendCount: {
+                        type: Number,
+                        computed: "computeFriends(friends)"
+                    }
+                };
+            }
+
+            computeFriends(friends){
+                return friends.length;
+            }
+        }
+
+        window.customElements.define(FriendsCounter.is, FriendsCounter);
+    </script>
+</dom-module>

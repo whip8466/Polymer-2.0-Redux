@@ -1,0 +1,70 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./shared-styles.html">
+
+<link rel="import" href="./state/redux-store.html">
+
+<dom-module id="set-colors">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+                padding: 10px;
+            }
+            #backgroundSection {
+                width:100px;
+                height:100px;
+            }
+        </style>
+
+        <div class="card">
+            <h3>Redux - [[bkgroundcolor]] </h3>
+            <div class="section">
+                <div  style$="background-color:[[bkgroundcolor]]" id="backgroundSection"></div>
+                <button on-click="changeColor" data-color="green">Green</button>
+                <button on-click="changeColor" data-color="blue">Blue</button>
+                <button on-click="changeColor" data-color="red">Red</button>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class SetColors extends ReduxMixin(Polymer.Element) {
+            static get is() { return 'set-colors'; }
+            static get properties() {
+                return {
+                    bkgroundcolor: {
+                        type: String,
+                        statePath(state) {
+                            return state.bkcolor;
+                        }
+                    }
+                };
+            }
+            static get actions() {
+                return {
+                    changeColorState(bkColor) {
+                        switch(bkColor) {
+                            case 'green':
+                                return {
+                                    type: 'BKGROUND_COLOR_GREEN'
+                                };
+                            case 'blue':
+                                return {
+                                    type: 'BKGROUND_COLOR_BLUE'
+                                };
+                            case 'red':
+                                return {
+                                    type: 'BKGROUND_COLOR_RED'
+                                };
+                        }
+                    }
+                };
+            }
+            changeColor(e) {
+                this.dispatch('changeColorState',e.target.dataset.color);
+            }
+        }
+        window.customElements.define(SetColors.is, SetColors);
+    </script>
+</dom-module>

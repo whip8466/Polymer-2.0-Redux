@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+<script src="../../node_modules/redux/dist/redux.min.js"></script>
+
+<script>
+    const initialState = {
+        bkcolor: 'green',
+        friends : ["Vipul Solanki"]
+    };
+
+    const reducer = (state, action) => {
+        if(!state) return initialState;
+        switch(action.type){
+            case "UPDATE_LOGGEDIN":
+                state.isLoggedIn = action.isLogin;
+                return Object.assign({}, state, {isLoggedIn:state.isLoggedIn});
+
+            case 'BKGROUND_COLOR_GREEN':
+                return Object.assign({}, state, {
+                    bkcolor: 'green'
+                });
+            case 'BKGROUND_COLOR_BLUE':
+                return Object.assign({}, state, {
+                    bkcolor: 'blue'
+                });
+            case 'BKGROUND_COLOR_RED':
+                return Object.assign({}, state, {
+                    bkcolor: 'red'
+                });
+            case "ADD_FRIEND":
+                let friends = state.friends.slice(0);
+                friends.push(action.friend);
+                return Object.assign({}, state, {friends:friends});
+            default:
+                return state;
+        }
+    }
+
+    const store = Redux.createStore(
+        reducer,
+        initialState,
+        Redux.compose(
+            window.devToolsExtension
+                ? window.devToolsExtension()
+                : v => v
+            )
+    );
+    const ReduxMixin = PolymerRedux(store);
+</script>
